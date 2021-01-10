@@ -19,9 +19,13 @@ Initial version of swagger/swagger.yaml
 - Consts should come from config
 - Error codes must be introduced via swagger
 - Times in error attributes must be in the same format as in input/output
+- Throttling and limit on number of user's appointments not implemented
 
 ## Instruction
 - make swagger - generate server code
 - make build - builds the service
 - make start - starts the service on 8080 port
 - make live-test - is supposed to send some queries and validate responses
+
+## Assumptions
+The server resides behid API GW which terminates TLS, performs auth (e.g. JWT or oauth2) and pushed authenticated user/trainer/admin ids to the backend via headers.
