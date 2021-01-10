@@ -9,3 +9,7 @@ build:
 .PHONY: start
 start:
 	bin/server --port 8080
+
+.PHONY: live-test
+live-test:
+	./test
