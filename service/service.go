@@ -82,8 +82,8 @@ func (s* Service) ListAvailableTimesForTrainer(params su.ListAvailableTimesForTr
 func (s *Service) ListTrainerAppointments(params st.ListTrainerAppointmentsParams) middleware.Responder {
 	if time.Time(params.EndsAt).Sub(time.Time(params.EndsAt)) > MaxTimeInterval {
 		return st.NewListTrainerAppointmentsBadRequest().WithPayload(&sm.Error{
-			Code: codeAsString(StartTimeInPast),
-			Devmessage: "Start time in the past.",
+			Code: codeAsString(TimeIntervalTooLarge),
+			Devmessage: "List interval is too large",
 			Attributes: []string{strconv.FormatInt(MaxTimeIntervalDays, 10)},
 		})
 	}
