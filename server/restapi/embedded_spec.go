@@ -34,7 +34,7 @@ func init() {
     },
     "version": "1.0.0"
   },
-  "host": "localhost",
+  "host": "localhost:8080",
   "basePath": "/v1",
   "paths": {
     "/trainers/appointments": {
@@ -342,7 +342,7 @@ func init() {
     },
     "version": "1.0.0"
   },
-  "host": "localhost",
+  "host": "localhost:8080",
   "basePath": "/v1",
   "paths": {
     "/trainers/appointments": {
