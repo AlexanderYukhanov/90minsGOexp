@@ -4,6 +4,9 @@ package restapi
 
 import (
 	"crypto/tls"
+	storage "github.com/AlexanderYukhanov/90minsGOexp/memstorage"
+	"github.com/AlexanderYukhanov/90minsGOexp/service"
+	"log"
 	"net/http"
 
 	"github.com/go-openapi/errors"
@@ -22,6 +25,16 @@ func configureFlags(api *operations.ExperimentalAPI) {
 }
 
 func configureAPI(api *operations.ExperimentalAPI) http.Handler {
+	service, err := service.New(storage.NewStorageWithDefaultData())
+	if err != nil {
+		log.Fatalf("Failed to create a service: %v", err)
+	}
+	api.UsersCreateAppointmentHandler = users.CreateAppointmentHandlerFunc(service.CreateAppointment)
+	api.UsersListAvailableTimesForTrainerHandler =
+		users.ListAvailableTimesForTrainerHandlerFunc(service.ListAvailableTimesForTrainer)
+	api.TrainersListTrainerAppointmentsHandler =
+		trainers.ListTrainerAppointmentsHandlerFunc(service.ListTrainerAppointments)
+
 	// configure the api here
 	api.ServeError = errors.ServeError
 
